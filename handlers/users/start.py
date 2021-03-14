@@ -9,4 +9,6 @@ async def bot_start(message: types.Message):
     await message.answer_sticker(sticker=ryuk_hi)
     await message.answer(f'Hello, {message.from_user.full_name}!\n\n'
                          f'You have the privilege of using the Death Note, so read the rules before you start.\n\n'
-                         f'🍎 /rules 🖋 (click here)')
+                         f'🍎 /rules 🖋 (click here)'
+                         f"If you have read the rules, you can start using the death note: \n\n"
+                         f"📓 /write_down 📓 (click here)")
