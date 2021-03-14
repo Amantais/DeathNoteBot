@@ -8,3 +8,9 @@ admins = [
     os.getenv('admins')
 ]
 IP = os.getenv('ip')
+DB_HOST = IP
+PGUSER = str(os.getenv('PGUSER'))
+PGPASSWORD = str(os.getenv('PGPASSWORD'))
+
+POSTGRES_URI = f"postgresql://{PGUSER}:{PGPASSWORD}@{DB_HOST}/{'postgres'}"
+
