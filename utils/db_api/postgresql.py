@@ -1,13 +1,14 @@
 from typing import Union
 
-import asyncpg 
+import asyncpg
 from asyncpg.pool import Pool
 
-from data import config 
+from data import config
+
 
 class Database:
     def __init__(self):
-        self.pool: Union[Pool, None] = None 
+        self.pool: Union[Pool, None] = None
 
     async def create(self):
         pool = await asyncpg.create_pool(
@@ -20,10 +21,10 @@ class Database:
 
     async def create_table_users(self):
         sql = """
-        CREATE TABLE IF NOT EXISTS Users(
+        CREATE TABLE IF NOT EXISTS Users (
             id INT NOT NULL,
             Name varchar(255) NOT NULL,
-            PRIMARY KEY(id)
+            PRIMARY KEY (id)
             );
 """
         await self.pool.execute(sql)
@@ -41,26 +42,13 @@ class Database:
         """
         await self.pool.execute(sql, id, name)
 
-    async def select_all_users(self):
-        sql = """
-        SELECT * FROM Users
-        """
-        return await self.pool.fetch(sql)
-
-    async def select_user(self, **kwargs):
-        sql = f"""
-        SELECT * FROM Users WHERE 
-        """
-        sql, parameters = self.format_args(sql, parameters=kwargs)
-        return await self.pool.fetchrow(sql, *parameters)
-
     async def count_users(self):
         return await self.pool.fetchval("SELECT COUNT(*) FROM Users")
 
 
 class DatabaseNote:
     def __init__(self):
-        self.pool: Union[Pool, None] = None 
+        self.pool: Union[Pool, None] = None
 
     async def create(self):
         pool = await asyncpg.create_pool(
@@ -79,9 +67,9 @@ class DatabaseNote:
             Name_Victim varchar(255) NOT NULL,
             reason varchar(255),
             PRIMARY KEY (id_victim)
-        );
-"""     
-        self.pool.execute(sql)
+            );
+"""
+        await self.pool.execute(sql)
 
     @staticmethod
     def format_args(sql, parameters: dict):
@@ -89,7 +77,6 @@ class DatabaseNote:
             f"{item} = ${num + 1}" for num, item in enumerate(parameters)
         ])
         return sql, tuple(parameters.values())
-
 
     async def add_victim(self, id_user: int, id_victim: int, name_victim: str, reason: str = "Heart Attack"):
         sql = """
@@ -104,6 +91,13 @@ class DatabaseNote:
         sql, parameters = self.format_args(sql, parameters=kwargs)
         return await self.pool.fetch(sql, *parameters)
 
-
     async def count_victims(self):
         return await self.pool.fetchval("SELECT COUNT(*) FROM Notes")
+    
+
+    async def delete_victims(self, **kwargs):
+        sql = f"""
+             DELETE FROM Notes WHERE 
+             """
+        sql, parameters = self.format_args(sql, parameters=kwargs)
+        return await self.pool.fetch(sql, *parameters)
