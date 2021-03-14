@@ -67,7 +67,7 @@ class DatabaseNote:
             user=config.PGUSER,
             password=config.PGPASSWORD,
             host=config.IP,
-            database='postres'
+            database='postgres'
         )
         self.pool = pool
 
