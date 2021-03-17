@@ -14,6 +14,7 @@
 /write_down - write in the death note
 <br>/death_list - show victim list</br
 
+***
 At the command to start:
 <br>A user database is created and the user is added to it and a welcome message is displayed</br>
 <br>![Image alt](https://github.com/waydk/death-note_bot/blob/main/examples/Screenshot from 2021-03-14 18-41-47.png)</br>
