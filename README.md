@@ -17,5 +17,5 @@
 ***
 At the command to start:
 <br>A user database is created and the user is added to it and a welcome message is displayed</br>
-<br>![Image alt](https://github.com/waydk/death-note_bot/blob/main/examples/Screenshot from 2021-03-14 18-41-47.png)</br>
+<br>![Image alt](https://github.com/Amantais/DeathNoteBot/blob/master/examples/Screenshot%20from%202021-03-14%2018-41-47.png)</br>
 ***
